@@ -1,0 +1,23 @@
+﻿INSERT INTO Post (Title, Content, ImageLocation, CreateDateTime, PublishDateTime, IsApproved, CategoryId, UserProfileId)
+Values ('Growing Artichokes', 'Growing artichokes in your garden is simple and easy to manage. Let us show you how to grow this delicious vegetable at Bonnie Plants.', 'https://cdn.shopify.com/s/files/1/0257/4565/3811/articles/BONNIE-PLANTS_artichokes-iStock-182833592-2400px_d6c556c8-ac94-4d39-be47-8a69ffe552d2.jpg?v=1642541997&width=832', '2021-10-26 13:32:38.927', '2021-10-27 13:33:38.927', 1, 1, 2);
+
+INSERT INTO Post (Title, Content, ImageLocation, CreateDateTime, PublishDateTime, IsApproved, CategoryId, UserProfileId)
+Values ('Fertile Soil', 'Composting reduces pollution, reuses organic waste, reduces the cost of fertilizers and agricultural production inputs and especially returns to soil the nutrients taken to produce food.', 'https://www.fao.org/fileadmin/user_upload/GSP/Areas_of_Work/nutrient_imbalance/z.jpg', '2022-08-26 13:32:38.927', '2022-08-27 13:33:38.927', 1, 1, 2);
+
+INSERT INTO Post (Title, Content, ImageLocation, CreateDateTime, PublishDateTime, IsApproved, CategoryId, UserProfileId)
+Values ('Meet Archaeopteryx, a Feathered Dino With Wings and Teeth', 'It all began with a single feather. On Sept. 30, 1861, the German paleontologist Christian Erich Hermann von Meyer published his description of a jaw-dropping new find. Fossil feathers were unheard of at the time, yet somebody had pulled one out of a limestone quarry near Solnhofen, Bavaria. Von Meyer named the animal it belonged to Archaeopteryx lithographica. His choice was apt; the first part of that name (i.e., Archaeopteryx) means "ancient wing."', 'https://media.hswstatic.com/eyJidWNrZXQiOiJjb250ZW50Lmhzd3N0YXRpYy5jb20iLCJrZXkiOiJnaWZcL2FyY2hhZW9wdGVyeXguanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo4Mjh9LCJ0b0Zvcm1hdCI6ImF2aWYifX0=', '2022-06-26 13:32:38.927', '2022-06-27 13:33:38.927', 1, 1,3); 
+INSERT INTO Post (Title, Content, ImageLocation, CreateDateTime, PublishDateTime, IsApproved, CategoryId, UserProfileId)
+Values ('Butterfly Wing Shapes', 'To identify butterflies in this group, look for wings with edges that are jagged, irregular, and angular.', 'https://www.gardenswithwings.com/wp-content/uploads/eacoUOde-450x450.jpg', '2021-06-26 13:32:38.927', '2021-06-27 13:33:38.927', 1, 1, 3);
+
+
+INSERT INTO Post (Title, Content, ImageLocation, CreateDateTime, PublishDateTime, IsApproved, CategoryId, UserProfileId)
+Values ('Exercises for Women to get Build', 'Strength training for women doesnt have to be complicated to be effective. Heres how to get stronger and see the benefits both in your life and in the mirror!', 'https://www.bodybuilding.com/images/2021/june/these-workouts-are-how-strong-women-get-built-header-830x467.jpg', '2022-03-26 13:32:38.927', '2022-03-27 13:33:38.927', 1, 1, 4);
+
+INSERT INTO Post (Title, Content, ImageLocation, CreateDateTime, PublishDateTime, IsApproved, CategoryId, UserProfileId)
+Values ('Ladies Who Lift', 'In the past few years, weight training for women has increased in popularity. There are several reasons for this, including the rise of social media and common misconceptions about strength training being challenged.', 'https://regymenfitness.com/wp-content/uploads/2021/12/Sportive-serious-people-liftin-980x654.jpg', '2022-03-12 13:32:38.927', '2022-03-15 13:33:38.927', 1, 1, 4);
+
+INSERT INTO Post (Title, Content, ImageLocation, CreateDateTime, PublishDateTime, IsApproved, CategoryId, UserProfileId)
+Values ('9 Guidelines & Best Practices for Exceptional Web Design and Usability', 'When it comes to designing or redesigning a website, it is easy to get hung up on the aesthetics. Does that shade of blue look right? Should the logo be on the right side of the screen, or left?', 'https://img.freepik.com/free-photo/laughing-black-man-glasses-expressing-excitement-emotional-international-student-holding-computer_197531-20167.jpg?w=2000', '2022-02-10 13:32:38.927', '2022-03-02 13:33:38.927', 1, 1, 5);
+
+INSERT INTO Post (Title, Content, ImageLocation, CreateDateTime, PublishDateTime, IsApproved, CategoryId, UserProfileId)
+Values ('Comprehensive Guide to Web Design', 'Web design is a complex subject. Designers and developers have to consider both visual appearance (how the website looks) and functional design (how the website works). With so many things that you need to take into account, the process of design can be tricky. To simplify the task, we’ve prepared this guide for you.', 'https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/60108275cdfc197127f413f9_6002086f72b72727fa01d794_kai-jolly-site.gif', '2022-01-10 13:32:38.927', '2022-01-22 13:33:38.927', 1, 1, 5);
