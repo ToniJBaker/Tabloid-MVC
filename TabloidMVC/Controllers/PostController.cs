@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualBasic;
+using System;
 using System.Security.Claims;
+using TabloidMVC.Models;
 using TabloidMVC.Models.ViewModels;
 using TabloidMVC.Repositories;
 
@@ -13,6 +15,7 @@ namespace TabloidMVC.Controllers
     {
         private readonly IPostRepository _postRepository;
         private readonly ICategoryRepository _categoryRepository;
+        
 
         public PostController(IPostRepository postRepository, ICategoryRepository categoryRepository)
         {
@@ -72,6 +75,25 @@ namespace TabloidMVC.Controllers
         {
             string id = User.FindFirstValue(ClaimTypes.NameIdentifier);
             return int.Parse(id);
+        }
+        public ActionResult Delete(int id)
+        {
+            Post post = _postRepository.GetPublishedPostById(id);
+            return View(post);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, Post post)
+        {
+            try
+            {
+                _postRepository.DeletePost(id);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return View(post);
+            }
         }
     }
 }
