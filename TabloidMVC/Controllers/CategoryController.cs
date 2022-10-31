@@ -47,7 +47,7 @@ namespace TabloidMVC.Controllers
             }
             catch(Exception ex)
             {
-                return View();
+                return View(category);
             }
         }
 
