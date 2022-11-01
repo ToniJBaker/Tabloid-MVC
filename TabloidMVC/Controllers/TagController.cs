@@ -24,5 +24,25 @@ namespace TabloidMVC.Controllers
         {
             return View();
         }
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: CategoryController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Tag tag)
+        {
+            try
+            {
+                _tagRepo.AddTag(tag);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }

@@ -25,8 +25,9 @@
                         @Html.DisplayFor(model => model.Name)
                     </dd>*@
                     <div class="form-group">
-                        <label asp-for="Name" class="control-label"></label>
-                        <input asp-for="Name" class="form-control" />
+                        <label asp-for="Name" class="control-label"></label><br />
+                        @*<input asp-for="Name" class="form-control" />*@
+                        @Html.DisplayFor(model => model.Name)
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                 </dl>
