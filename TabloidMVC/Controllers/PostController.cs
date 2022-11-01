@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.VisualBasic;
 using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using TabloidMVC.Models;
 using TabloidMVC.Models.ViewModels;
@@ -82,20 +85,24 @@ namespace TabloidMVC.Controllers
             var vm = new PostCreateViewModel();
             vm.Post = _postRepository.GetPublishedPostById(id);
             vm.CategoryOptions = _categoryRepository.GetAll();
+            if (vm.Post == null)
+            {
+                return RedirectToAction("Details", new { id = vm.Post.Id });
+            }
             return View(vm);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, PostCreateViewModel vm)
+        public ActionResult Edit(int id, Post post)
         {
             try
             {
-                _postRepository.EditPost(vm.Post);
-                return RedirectToAction(nameof(Index));
+                _postRepository.EditPost(post);
+                return RedirectToAction("Details", new { id = post.Id });
             }
             catch (Exception ex)
             {
-                return View(vm.Post);
+                return View(post);
             }
         }
 
