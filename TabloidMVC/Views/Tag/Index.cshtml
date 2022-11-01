@@ -25,9 +25,7 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>*@
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -36,15 +34,13 @@
                             <i class="fas fa-pencil-alt"></i>
                         </a>
                         
-                            @*@if(item.RelatedPost.Count = 0)
-                            {*@
-                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-primary mx-1" title="Delete">
-                                    <i class="fas fa-trash"></i>
-                        </a>
+                        @if (item.RelatedPost.Count < 1)
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-primary mx-1" title="Delete">
+                                <i class="fas fa-trash"></i>
+                        </a>}
 
-                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new {  id=item.Id  }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                
             </td>
         </tr>
 }
