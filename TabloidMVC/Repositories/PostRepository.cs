@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Reflection;
 using System.Reflection.PortableExecutable;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -196,6 +197,38 @@ namespace TabloidMVC.Repositories
                     }
                 }
             };
+        }
+
+        public void EditPost(Post post)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using(SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            UPDATE Post
+                            SET 
+                Title = @Title,
+                Content = @Content,
+                ImageLocation = @ImageLocation,
+                CreateDateTime = @CreateDateTime,
+                PublishDateTime = @PublishDateTime,
+                CategoryId = @CategoryId
+                WHERE Id = @Id";
+
+                    cmd.Parameters.AddWithValue("@Title", post.Title);
+                    cmd.Parameters.AddWithValue("@Content", post.Content);
+                    cmd.Parameters.AddWithValue("@ImageLocation", post.ImageLocation);
+                    cmd.Parameters.AddWithValue("@CreateDateTime", post.CreateDateTime);
+                    cmd.Parameters.AddWithValue("@PublishDateTime", post.PublishDateTime);
+                    cmd.Parameters.AddWithValue("@CategoryId", post.CategoryId);
+                    cmd.Parameters.AddWithValue("@Id", post.Id);
+
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
         }
         public void DeletePost(int Id)
         {
