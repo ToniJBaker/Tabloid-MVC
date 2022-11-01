@@ -36,11 +36,11 @@
                             <i class="fas fa-pencil-alt"></i>
                         </a>
                         
-                            if (item.RelatedPost.Count = 0)
-                            {
+                            @*@if(item.RelatedPost.Count = 0)
+                            {*@
                                 <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-primary mx-1" title="Delete">
                                     <i class="fas fa-trash"></i>
-                        </a>}
+                        </a>
 
                 @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new {  id=item.Id  }) |
