@@ -43,8 +43,10 @@ namespace TabloidMVC.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id,[Name]
-                        FROM Tag
+                        SELECT p.Id,p.[Name], t.Id, t.[Name], pt.PostId, pt.TagId
+                        FROM Post p 
+                        Left JOIN PostTag pt ON pt.PostId = p.Id
+                        Left JOIN Tag t ON t.Id = pt.TagId
                         WHERE Id = @id
                     ";
 
@@ -89,6 +91,31 @@ namespace TabloidMVC.Repositories
                     int id = (int)cmd.ExecuteScalar();
 
                     tag.Id = id;
+                }
+            }
+        }
+        public void UpdateTag(Tag tag)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            UPDATE Tag
+                            SET 
+                                Id = id
+                                [Name] = @name, 
+                                 
+                                
+                            WHERE Id = @id";
+
+                    cmd.Parameters.AddWithValue("@name", tag.Name);
+                                        
+                    cmd.Parameters.AddWithValue("@id", tag.Id);
+
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

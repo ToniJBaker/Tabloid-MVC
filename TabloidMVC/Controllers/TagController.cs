@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using TabloidMVC.Repositories;
 using TabloidMVC.Models;
+using System;
 
 namespace TabloidMVC.Controllers
 {
@@ -42,6 +43,31 @@ namespace TabloidMVC.Controllers
             catch
             {
                 return View();
+            }
+        }
+        public ActionResult Edit(int id)
+        {
+            Tag tag = _tagRepo.GetTagById((int)id);
+            if(tag == null)
+            {
+                return NotFound();
+            }
+            return View(tag);
+        }
+
+        // POST: 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, Tag tag)
+        {
+            try
+            {
+                _tagRepo.UpdateTag(tag);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return View(tag);
             }
         }
     }
