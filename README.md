@@ -21,3 +21,7 @@ Tabloid MVC will have two types of users:
 ### ERD
 
 ![Tabloid ERD](./Tabloid.png)
+
+### Wireframe
+https://www.figma.com/file/dCJkna979LjEf7qaBlGCuH/TabloidMVC?node-id=0%3A1
+![Screenshot (48)](https://user-images.githubusercontent.com/106984214/199223200-eec5f9cb-67e3-4825-87d7-6eb6311dced6.png)

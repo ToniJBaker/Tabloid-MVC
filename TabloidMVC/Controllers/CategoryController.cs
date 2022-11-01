@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using TabloidMVC.Repositories;
 using TabloidMVC.Models;
+using System;
 
 namespace TabloidMVC.Controllers
 {
@@ -44,9 +45,9 @@ namespace TabloidMVC.Controllers
                 _categoryRepo.AddCategory(category);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                return View(category);
             }
         }
 
@@ -65,7 +66,7 @@ namespace TabloidMVC.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
                 return View();
             }
@@ -74,21 +75,23 @@ namespace TabloidMVC.Controllers
         // GET: CategoryController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Category category = _categoryRepo.GetCategoryById(id);
+            return View(category);
         }
 
         // POST: CategoryController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Category category)
         {
             try
             {
+                _categoryRepo.DeleteCategory(id);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                return View(category);
             }
         }
     }
