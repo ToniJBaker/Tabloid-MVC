@@ -16,7 +16,7 @@ namespace TabloidMVC.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT c.id,c.Name, p.CategoryId, p.Id as 'post Id', p.Title, p.Content, p.CategoryId FROM Category c 
+                    cmd.CommandText = @"SELECT c.id,c.Name, p.CategoryId, p.Id as 'post Id', p.Title, p.Content FROM Category c 
                                         LEFT JOIN Post p 
                                         ON c.id = p.CategoryId ";
                     var reader = cmd.ExecuteReader();
