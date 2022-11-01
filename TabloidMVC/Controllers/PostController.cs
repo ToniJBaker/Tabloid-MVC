@@ -79,21 +79,23 @@ namespace TabloidMVC.Controllers
 
         public ActionResult Edit(int id)
         {
-            Post post = _postRepository.GetPublishedPostById(id);
-            return View(post);
+            var vm = new PostCreateViewModel();
+            vm.Post = _postRepository.GetPublishedPostById(id);
+            vm.CategoryOptions = _categoryRepository.GetAll();
+            return View(vm);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Post post)
+        public ActionResult Edit(int id, PostCreateViewModel vm)
         {
             try
             {
-                _postRepository.EditPost(post);
+                _postRepository.EditPost(vm.Post);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
-                return View(post);
+                return View(vm.Post);
             }
         }
 
