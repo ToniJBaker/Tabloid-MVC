@@ -69,6 +69,7 @@ namespace TabloidMVC.Controllers
         {
             try
             {
+                _categoryRepo.UpdateCategory(category);
                 return RedirectToAction(nameof(Index));
             }
             catch(Exception ex)
