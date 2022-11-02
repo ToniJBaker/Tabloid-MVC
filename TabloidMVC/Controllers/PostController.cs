@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.VisualBasic;
 using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using TabloidMVC.Models;
 using TabloidMVC.Models.ViewModels;
@@ -26,6 +29,12 @@ namespace TabloidMVC.Controllers
         public IActionResult Index()
         {
             var posts = _postRepository.GetAllPublishedPosts();
+            return View(posts);
+        }
+        public IActionResult MyIndex()
+        {
+            int userId = GetCurrentUserProfileId();
+            var posts = _postRepository.GetAllUserPosts(userId);
             return View(posts);
         }
 
@@ -76,6 +85,33 @@ namespace TabloidMVC.Controllers
             string id = User.FindFirstValue(ClaimTypes.NameIdentifier);
             return int.Parse(id);
         }
+
+        public ActionResult Edit(int id)
+        {
+            var vm = new PostEditViewModel();
+            vm.Post = _postRepository.GetPublishedPostById(id);
+            vm.CategoryOptions = _categoryRepository.GetAll();
+            if (vm.Post == null)
+            {
+                return RedirectToAction("Details", new { id = vm.Post.Id });
+            }
+            return View(vm);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, Post post)
+        {
+            try
+            {
+                _postRepository.EditPost(post);
+                return RedirectToAction("Details", new { id = post.Id });
+            }
+            catch (Exception ex)
+            {
+                return View(post);
+            }
+        }
+
         public ActionResult Delete(int id)
         {
             Post post = _postRepository.GetPublishedPostById(id);
