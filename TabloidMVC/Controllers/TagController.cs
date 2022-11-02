@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using TabloidMVC.Repositories;
 using TabloidMVC.Models;
+using System;
 
 namespace TabloidMVC.Controllers
 {
@@ -42,6 +43,27 @@ namespace TabloidMVC.Controllers
             catch
             {
                 return View();
+            }
+        }
+        public ActionResult Delete(int id)
+        {
+            Tag tag = _tagRepo.GetTagById(id);
+            return View(tag);
+        }
+
+        // POST: CategoryController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, Tag tag)
+        {
+            try
+            {
+                _tagRepo.DeleteTag(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return View(tag);
             }
         }
     }
