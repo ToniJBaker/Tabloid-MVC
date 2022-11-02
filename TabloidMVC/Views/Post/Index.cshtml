@@ -1,4 +1,5 @@
-﻿@model IEnumerable<TabloidMVC.Models.Post>
+﻿@*@model IEnumerable<TabloidMVC.Models.Post>*@
+@model TabloidMVC.Models.ViewModels.PostUserViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -15,22 +16,22 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Title)
+                    Title
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.UserProfileId)
+                    Author
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CategoryId)
+                    Category
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.PublishDateTime)
+                    Published
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.Posts)
             {
                 <tr>
                     <td>
@@ -49,12 +50,15 @@
                         <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary mx-1" title="View">
                             <i class="fas fa-eye"></i>
                         </a>
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary mx-1" title="Edit">
-                            <i class="fas fa-pencil-alt"></i>
-                        </a>
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-primary mx-1" title="Delete">
-                            <i class="fas fa-trash"></i>
-                        </a>
+                        
+                        @if(Model.currentUserId == item.UserProfileId){
+
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary mx-1" title="Edit">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-primary mx-1" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </a>}
                     </td>
                 </tr>
             }
