@@ -1,5 +1,5 @@
 ﻿@*@model TabloidMVC.Models.Post*@
-@model TabloidMVC.Models.ViewModels.PostEditViewModel
+@model TabloidMVC.Models.ViewModels.PostEditViewModel //view model to access post and current user id
 
 
 @{
@@ -18,7 +18,7 @@
                 <p class="text-black-50">Published on @Html.DisplayFor(model => model.Post.PublishDateTime)</p>
             </div>
             <div class="row">
-                @if (Model.currentUserId == Model.Post.UserProfileId)
+                @if (Model.currentUserId == Model.Post.UserProfileId) //conditional to check current user id
                 {
                     <a asp-action="Edit" asp-route-id="@Model.Post.Id" class="btn btn-outline-primary mx-1" title="Edit">
                         <i class="fas fa-pencil-alt"></i>
