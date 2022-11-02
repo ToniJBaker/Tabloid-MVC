@@ -1,0 +1,49 @@
+﻿@model IEnumerable<TabloidMVC.Models.Comment>
+@using System.Linq;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container pt-5">
+<h1>@Model.First().Post.Title</h1>
+    @Html.ActionLink("Return to Post", "", "", new {  id=Model.First().PostId  })
+    <table class="table">
+    <thead>
+        <tr>
+            <th>
+                Subject
+            </th>
+            <th>
+                Content
+            </th>
+            <th>
+                Created
+            </th>
+            <th>
+                Author
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subject)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DisplayName)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
