@@ -78,6 +78,7 @@ namespace TabloidMVC.Repositories
                         SELECT Id,[Name]
                         FROM Tag
                         WHERE Id = @id
+                        
                     ";
 
                     cmd.Parameters.AddWithValue("@id", id);
