@@ -43,11 +43,10 @@ namespace TabloidMVC.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT p.Id,p.[Name], t.Id, t.[Name], pt.PostId, pt.TagId
-                        FROM Post p 
-                        Left JOIN PostTag pt ON pt.PostId = p.Id
-                        Left JOIN Tag t ON t.Id = pt.TagId
+                        SELECT Id,[Name]
+                        FROM Tag
                         WHERE Id = @id
+                        
                     ";
 
                     cmd.Parameters.AddWithValue("@id", id);
@@ -105,10 +104,7 @@ namespace TabloidMVC.Repositories
                     cmd.CommandText = @"
                             UPDATE Tag
                             SET 
-                                Id = id
-                                [Name] = @name, 
-                                 
-                                
+                                [Name] = @name 
                             WHERE Id = @id";
 
                     cmd.Parameters.AddWithValue("@name", tag.Name);
