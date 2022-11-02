@@ -82,7 +82,7 @@ namespace TabloidMVC.Controllers
 
         public ActionResult Edit(int id)
         {
-            var vm = new PostCreateViewModel();
+            var vm = new PostEditViewModel();
             vm.Post = _postRepository.GetPublishedPostById(id);
             vm.CategoryOptions = _categoryRepository.GetAll();
             if (vm.Post == null)
