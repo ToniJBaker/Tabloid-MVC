@@ -48,17 +48,17 @@ namespace TabloidMVC.Repositories
                         }  
 
                         
-                        if(!categories.Any(x => x.Id == category.Id))
+                        if(!categories.Any(x => x.Id == category.Id)) //checking to see if list contain current category
                         {
 
-                        categories.Add(category);
+                        categories.Add(category); //if doesn't contain, then add to list
 
                         }
                         else
                          {
-                            if (post != null)
+                            if (post != null) //now looking at post, is there a post to add to the RelatedPost list
                             {
-                                    categories.FirstOrDefault(x => x.Id == category.Id).RelatedPost.Add(post);
+                                    categories.FirstOrDefault(x => x.Id == category.Id).RelatedPost.Add(post); //add this post to the RelatedPost list for this category
                             }
                           }
                         }
