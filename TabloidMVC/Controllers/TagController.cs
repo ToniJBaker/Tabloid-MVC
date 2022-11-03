@@ -4,22 +4,34 @@ using System.Collections.Generic;
 using TabloidMVC.Repositories;
 using TabloidMVC.Models;
 using System;
+using TabloidMVC.Models.ViewModels;
 
 namespace TabloidMVC.Controllers
 {
     public class TagController : Controller
     {
         private readonly ITagRepository _tagRepo;
+       
+        
 
-        public TagController(ITagRepository tagRepository)
+        public TagController(ITagRepository tagRepository )
         {
             _tagRepo = tagRepository;
+            
         }
         public ActionResult Index()
         {
             List<Tag> tags = _tagRepo.GetAllTags();
             return View(tags);
         }
+
+        public ActionResult TagsOnPostsIndex(PostTag postTag)
+        {
+            List<Tag> tags = _tagRepo.GetAllTags();
+            
+            return View(tags);
+        }
+        
 
         public ActionResult Details(int id)
         {
