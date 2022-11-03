@@ -1,5 +1,4 @@
-﻿@*@model TabloidMVC.Models.Post*@
-@model TabloidMVC.Models.ViewModels.PostEditViewModel //view model to access post and current user id
+﻿@model TabloidMVC.Models.ViewModels.PostEditViewModel //view model to access post and current user id
 
 
 @{
@@ -30,6 +29,16 @@
                         <i class="fas fa-tag"></i>
                     </a>
                 }
+                @if (Model.Post.Comments.Count != 0)
+                {
+                    <a asp-action="Index" asp-route-id="@Model.Post.Id" asp-controller="Comment" class="btn btn-outline-primary mx-1" title="View Comments">
+                        <i class="fas fa-comment"></i>
+                    </a>
+                }
+                else
+                {
+                    <a></a>
+                }
             </div>
         </section>
         <hr />
@@ -46,3 +55,13 @@
         </section>
     </div>
 </div>
+
+
+          
+
+
+
+            
+
+              
+       
