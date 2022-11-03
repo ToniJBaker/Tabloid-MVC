@@ -2,11 +2,9 @@
 
 namespace TabloidMVC.Models.ViewModels
 {
-    public class PostEditViewModel
+    public class PostUserViewModel
     {
-        public Post Post { get; set; }
-        public List<Category> CategoryOptions { get; set; }
-
+        public List<Post> Posts { get; set; }
         public int currentUserId { get; set; }
     }
 }
