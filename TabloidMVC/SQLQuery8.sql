@@ -1,6 +1,7 @@
-﻿SELECT t.Id, t.Name, p.Id AS 'post Id', p.Title, p.Content, pt.TagId, pt.PostId
-FROM Tag t
-LEFT JOIN PostTag pt
-ON t.id = pt.TagId
-LEFT JOIN Post p
-ON pt.PostId = p.Id;
+﻿SELECT p.Id, p.Title, t.Id, t.[Name], pt.PostId, pt.TagId
+FROM Post p 
+Left JOIN PostTag pt ON pt.PostId = p.Id
+Left JOIN Tag t ON t.Id = pt.TagId
+;
+
+Select * From Tag;

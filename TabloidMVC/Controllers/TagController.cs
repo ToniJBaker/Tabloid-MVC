@@ -30,7 +30,7 @@ namespace TabloidMVC.Controllers
             return View();
         }
 
-        // POST: CategoryController/Create
+        // POST: TagController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Tag tag)
@@ -40,9 +40,35 @@ namespace TabloidMVC.Controllers
                 _tagRepo.AddTag(tag);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                return View(tag);
+            }
+        }
+        //GET:
+        public ActionResult Edit(int id)
+        {
+            Tag tag = _tagRepo.GetTagById(id);
+            if(tag == null)
+            {
+                return NotFound();
+            }
+            return View(tag);
+        }
+
+        // POST: 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, Tag tag)
+        {
+            try
+            {
+                _tagRepo.UpdateTag(tag);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return View(tag);
             }
         }
         public ActionResult Delete(int id)
