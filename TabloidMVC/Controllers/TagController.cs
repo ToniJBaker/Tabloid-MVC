@@ -11,12 +11,12 @@ namespace TabloidMVC.Controllers
     public class TagController : Controller
     {
         private readonly ITagRepository _tagRepo;
-        private readonly IPostTagRepository _postTagRepo;
+        
 
-        public TagController(ITagRepository tagRepository, IPostTagRepository postTagRepository)
+        public TagController(ITagRepository tagRepository )
         {
             _tagRepo = tagRepository;
-            _postTagRepo = postTagRepository;
+            
         }
         public ActionResult Index()
         {
@@ -24,6 +24,11 @@ namespace TabloidMVC.Controllers
             return View(tags);
         }
 
+        public ActionResult TagsOnPostsIndex()
+        {
+            List<Tag> tags = _tagRepo.GetAllTags();
+            return View(tags);
+        }
         
 
         public ActionResult Details(int id)
