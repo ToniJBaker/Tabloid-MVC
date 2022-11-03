@@ -187,8 +187,9 @@ namespace TabloidMVC.Repositories
                     SqlDataReader reader = cmd.ExecuteReader();
                     var postTagsByPostId = new List<PostTag>();
 
-                    if (reader.Read())
+                    while (reader.Read())
                     {
+
                         PostTag postTag = new PostTag
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("PostTag id")),
@@ -208,14 +209,11 @@ namespace TabloidMVC.Repositories
                         };
                         postTagsByPostId.Add(postTag);
 
-                        reader.Close();
-                        return postTagsByPostId;
+                        
                     }
-                    else
-                    {
-                        reader.Close();
-                        return null;
-                    }
+                    reader.Close();
+
+                    return postTagsByPostId;
                 }
             }
         }
