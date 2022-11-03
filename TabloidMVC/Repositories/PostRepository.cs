@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
 using System.Reflection.PortableExecutable;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using TabloidMVC.Models;
@@ -106,22 +107,40 @@ namespace TabloidMVC.Repositories
                               u.FirstName, u.LastName, u.DisplayName, 
                               u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
                               u.UserTypeId, 
-                              ut.[Name] AS UserTypeName
+                              ut.[Name] AS UserTypeName,
+                              ct.Id as CommentId
                          FROM Post p
                               LEFT JOIN Category c ON p.CategoryId = c.id
                               LEFT JOIN UserProfile u ON p.UserProfileId = u.id
                               LEFT JOIN UserType ut ON u.UserTypeId = ut.id
+                              LEFT JOIN Comment ct on p.Id = ct.PostId
                         WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME()
                               AND p.id = @id";
-
                     cmd.Parameters.AddWithValue("@id", id);
                     var reader = cmd.ExecuteReader();
 
                     Post post = null;
 
+                  
                     if (reader.Read())
                     {
                         post = NewPostFromReader(reader);
+                      
+                    }
+
+               
+                    while (reader.Read())
+                    {
+                        try 
+                        {
+                            Comment comment = new Comment();
+                            comment.Id = reader.GetInt32(reader.GetOrdinal("CommentId"));
+                            post.Comments.Add(comment);
+                        }
+                        catch (Exception x)
+                        {
+                          
+                        }
                     }
 
                     reader.Close();
@@ -130,7 +149,6 @@ namespace TabloidMVC.Repositories
                 }
             }
         }
-
         public Post GetUserPostById(int id, int userProfileId)
         {
             using (var conn = Connection)
@@ -204,7 +222,7 @@ namespace TabloidMVC.Repositories
 
         private Post NewPostFromReader(SqlDataReader reader)
         {
-            return new Post()
+            Post post = new()
             {
                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                 Title = reader.GetString(reader.GetOrdinal("Title")),
@@ -235,8 +253,22 @@ namespace TabloidMVC.Repositories
                         Id = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
                         Name = reader.GetString(reader.GetOrdinal("UserTypeName"))
                     }
-                }
+                },
+                Comments = new List<Comment>()
             };
+            try
+            {
+                Comment comment = new()
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal("CommentId"))
+                };
+                post.Comments.Add(comment);
+            }
+            catch (Exception ex)
+            {
+               
+            }
+            return post;
         }
 
         public void EditPost(Post post)
