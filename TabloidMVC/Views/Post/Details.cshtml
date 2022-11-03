@@ -25,6 +25,17 @@
                 <a asp-action="Index" asp-route-id="@Model.Id" asp-controller="Tag" class="btn btn-outline-primary mx-1" title="Manage Tags">
                     <i class="fas fa-tag"></i>
                 </a>
+
+                @if (Model.Comments.Count != 0)
+                {
+                    <a asp-action="Index" asp-route-id="@Model.Id" asp-controller="Comment" class="btn btn-outline-primary mx-1" title="View Comments">
+                        <i class="fas fa-comment"></i>
+                    </a>
+                }
+                else
+                {
+                    <a></a>
+                }
             </div>
         </section>
         <hr />
@@ -38,12 +49,6 @@
         }
         <section class="row post__content">
             <p class="col-sm-12 mt-5">@Html.DisplayFor(model => model.Content)</p>
-            @if (Model.Comments.Count != 0)
-            {
-                @Html.ActionLink("View Comments", "Index", "Comment", new {  id=Model.Id  })
-                ;
-            }
-            |@Html.ActionLink("Back to Posts", "Index")
         </section>
     </div>
 </div>
