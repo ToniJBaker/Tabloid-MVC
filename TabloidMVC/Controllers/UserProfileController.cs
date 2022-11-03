@@ -38,7 +38,46 @@ namespace TabloidMVC.Controllers
         // GET: UserProfileController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            UserProfile user = _userProfileRepository.GetById(id);
+            List<UserType> userTypes = _userTypeRepository.GetUserTypes();
+
+            UserProfileViewModel vm = new()
+            {
+                UserProfile = user,
+                UserTypes = userTypes
+            };
+
+            return View(vm);
+        }
+
+        public ActionResult Register()
+        {
+            List<UserType> userTypes = _userTypeRepository.GetUserTypes();
+
+            UserProfileViewModel vm = new()
+            {
+                UserProfile = new UserProfile(),
+                UserTypes = userTypes
+            };
+
+            return View(vm);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(UserProfileViewModel vm)
+        {
+            try
+            {
+                vm.UserProfile.CreateDateTime = DateTime.Now;
+
+                _userProfileRepository.AddUser(vm.UserProfile);
+
+                return RedirectToAction("Login", "Account");
+            }
+            catch
+            {
+                return View(vm.UserProfile);
+            }
         }
 
         // GET: UserProfileController/Edit/5
