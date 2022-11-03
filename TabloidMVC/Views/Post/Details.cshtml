@@ -15,6 +15,11 @@
             </div>
             <div class="row justify-content-between">
                 <p class="text-secondary">Written by @Model.Post.UserProfile.DisplayName</p>
+                @foreach(var item in Model.PostTags)
+                {
+                <p class="text-secondary">Tags: @item.Tag.Name, </p>
+                }
+
                 <p class="text-black-50">Published on @Html.DisplayFor(model => model.Post.PublishDateTime)</p>
             </div>
             <div class="row">
@@ -26,7 +31,7 @@
                     <a asp-action="Delete" asp-route-id="@Model.Post.Id" class="btn btn-outline-primary mx-1" title="Delete">
                         <i class="fas fa-trash"></i>
                     </a>
-                    <a asp-action="Index" asp-route-id="@Model.Post.Id" asp-controller="Tag" class="btn btn-outline-primary mx-1" title="Manage Tags">
+                    <a asp-action="TagsForPostsIndex" asp-route-id="@Model.Post.Id" asp-controller="Tag" class="btn btn-outline-primary mx-1" title="Manage Tags">
                         <i class="fas fa-tag"></i>
                     </a>
                 }

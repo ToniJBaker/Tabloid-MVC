@@ -167,5 +167,58 @@ namespace TabloidMVC.Repositories
             }
         }
 
+        public List<PostTag> GetPostTagsByPostId(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT t.Id AS 'Tag id',t.Name, pt.id AS 'PostTag id', pt.PostId AS 'Post id', pt.TagId AS 'Tag id', p.id AS 'Single Post id'
+                        FROM Tag t
+                        LEFT JOIN PostTag pt ON t.id = pt.TagId
+                        LEFT JOIN Post p ON pt.PostId = P.id
+                        WHERE p.id = @id
+                    ";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    var postTagsByPostId = new List<PostTag>();
+
+                    if (reader.Read())
+                    {
+                        PostTag postTag = new PostTag
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("PostTag id")),
+                            PostId = reader.GetInt32(reader.GetOrdinal("Post id")),
+                            TagId = reader.GetInt32(reader.GetOrdinal("Tag id")),
+                            Post = new Post
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Single Post id"))
+                            },
+                            Tag = new Tag
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Tag id")),
+                                Name = reader.GetString(reader.GetOrdinal("Name"))
+                            }
+
+
+                        };
+                        postTagsByPostId.Add(postTag);
+
+                        reader.Close();
+                        return postTagsByPostId;
+                    }
+                    else
+                    {
+                        reader.Close();
+                        return null;
+                    }
+                }
+            }
+        }
+
     }
 }
