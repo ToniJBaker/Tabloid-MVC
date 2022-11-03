@@ -28,8 +28,14 @@ namespace TabloidMVC.Controllers
 
         public IActionResult Index()
         {
+            int userId = GetCurrentUserProfileId();
             var posts = _postRepository.GetAllPublishedPosts();
-            return View(posts);
+            PostUserViewModel vm = new PostUserViewModel()
+            {
+                Posts = posts,
+                currentUserId = userId
+            };
+            return View(vm);
         }
         public IActionResult MyIndex()
         {
@@ -41,16 +47,21 @@ namespace TabloidMVC.Controllers
         public IActionResult Details(int id)
         {
             var post = _postRepository.GetPublishedPostById(id);
+            int userId = GetCurrentUserProfileId();
+            PostEditViewModel vm = new PostEditViewModel()
+            {
+                Post = post,
+                currentUserId = userId
+            };
             if (post == null)
             {
-                int userId = GetCurrentUserProfileId();
                 post = _postRepository.GetUserPostById(id, userId);
                 if (post == null)
                 {
                     return NotFound();
                 }
             }
-            return View(post);
+            return View(vm);
         }
 
         public IActionResult Create()
