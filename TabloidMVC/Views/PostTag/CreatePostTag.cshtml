@@ -1,0 +1,44 @@
+﻿@*@model TabloidMVC.Models.PostTag*@
+@model TabloidMVC.Models.ViewModels.PostTagViewModel
+
+@{
+    ViewData["Title"] = "CreatePostTag";
+}
+
+<h1>CreatePostTag</h1>
+
+<h4>PostTag</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreatePostTag">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PostTag.Id" class="control-label"></label>
+                <input asp-for="PostTag.Id" class="form-control" />
+                <span asp-validation-for="PostTag.Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostTag.PostId" class="control-label"></label>
+                <input asp-for="PostTag.PostId" class="form-control" />
+                <span asp-validation-for="PostTag.PostId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostTag.TagId" class="control-label"></label>
+                <input asp-for="PostTag.TagId" class="form-control" />
+                <span asp-validation-for="PostTag.TagId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -5,6 +5,8 @@ namespace TabloidMVC.Repositories
 {
     public interface IPostTagRepository
     {
-        
+        void AddPostTag(PostTag postTag);
+        void DeletePostTag(int id);
+
     }
 }

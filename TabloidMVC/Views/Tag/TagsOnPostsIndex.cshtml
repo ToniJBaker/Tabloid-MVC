@@ -7,9 +7,7 @@
 <div class="container pt-5">
     <h1>Tags</h1>
 
-    <p>
-        <a class="btn btn-primary" asp-action="Create">New Tag</a>
-    </p>
+    
     <table class="table">
         <thead>
             <tr>
@@ -32,16 +30,13 @@
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary mx-1" title="Add Tag">
+                        <a asp-action="CreatePostTag" asp-route-id="@item.Id" class="btn btn-outline-primary mx-1" title="Add Tag">
                             <i class="fas fa-plus"></i>
                         </a>
-
                         
                         <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-primary mx-1" title="Delete Tag">
                             <i class="fas fa-minus"></i>
                         </a>
-                       
-
 
                     </td>
                 </tr>
