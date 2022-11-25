@@ -1,7 +1,7 @@
 # Tabloid MVC Prototype
 This is a working prototype application.  The prototype will help better understanding and refining of the product. It won't be as feature-rich or as polished as the final product, but it should implement the core features and be as close to the _current vision_ of the product as possible. 
 
-The application is a multi-user web application with rich user experience.  The the current prototype will utilize ASP<span>.NET</span> Core MVC for rapie development.
+The application is a multi-user web application with rich user experience.  The the current prototype will utilize ASP<span>.NET</span> Core MVC for rapid development.
 
 ### Users
 
